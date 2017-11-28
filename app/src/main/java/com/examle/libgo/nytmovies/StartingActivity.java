@@ -15,6 +15,12 @@ public class StartingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_starting);
         startingPrsenter = MoviesApp.getAppComponent().getStartingPresenter();
         startingPrsenter.createView();
+        startingPrsenter.setActivity(this);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

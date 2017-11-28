@@ -3,8 +3,13 @@ package com.examle.libgo.nytmovies.MoviesApiRequest;
 import android.util.Log;
 
 import com.examle.libgo.nytmovies.Pojos.HeadResponse;
+import com.examle.libgo.nytmovies.Pojos.Link;
+import com.examle.libgo.nytmovies.Pojos.Multimedia;
 import com.examle.libgo.nytmovies.Pojos.Result;
+import com.examle.libgo.nytmovies.Starting.StartingPrsenter;
+import com.examle.libgo.nytmovies.StartingActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -47,8 +52,15 @@ public class ApiService {
                     HeadResponse headResponse = response.body();
                     Log.d(TAG, headResponse.getStatus());
                     List<Result> resultList = headResponse.getResults();
-                    realmHelper.setResults(resultList);
-                    realmHelper.DBrecord();
+                    List<Multimedia> multimediaList = new ArrayList<>();
+                    List<Link> links = new ArrayList<>();
+                    for (Result result : resultList){
+                        multimediaList.add(result.getMultimedia());
+                        links.add(result.getLink());
+                    }
+
+                    realmHelper.setResults(resultList, multimediaList, links);
+                    realmHelper.startDBrecord();
                 }
             }
             @Override
@@ -82,8 +94,7 @@ public class ApiService {
 
     }
 
-
-
-
-
+    public void setPrsenter(StartingPrsenter prsenter){
+        realmHelper.setStartingPrsenter(prsenter);
+    }
 }
