@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+//Realm
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 26
@@ -22,6 +24,22 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+//Realm
+buildscript {
+    repositories {
+        google()
+        mavenLocal()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath "io.realm:realm-gradle-plugin:4.2.0"
+    }
+}
+//Realm
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

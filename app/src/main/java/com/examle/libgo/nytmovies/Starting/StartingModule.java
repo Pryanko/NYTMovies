@@ -1,6 +1,7 @@
 package com.examle.libgo.nytmovies.Starting;
 
 import com.examle.libgo.nytmovies.MoviesApiRequest.ApiService;
+import com.examle.libgo.nytmovies.MoviesApiRequest.RealmHelper;
 
 import dagger.Module;
 import dagger.Provides;
@@ -12,8 +13,13 @@ import dagger.Provides;
 public class StartingModule {
 
     @Provides
-    ApiService apiService(){
-        return new ApiService();
+    RealmHelper realmHelper(){
+        return new RealmHelper();
+    }
+
+    @Provides
+    ApiService apiService(RealmHelper realmHelper){
+        return new ApiService(realmHelper);
     }
 
     @Provides

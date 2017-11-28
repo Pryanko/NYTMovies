@@ -17,10 +17,14 @@ import retrofit2.Response;
 
 public class ApiService {
 
-
+    private RealmHelper realmHelper;
     final private String API_KEY = "e6b1734db83649b7aefd602fa213fcda";
     final private String TAG = "Сервер";
     String spider = "Spider";
+
+    public ApiService(RealmHelper realmHelper) {
+        this.realmHelper = realmHelper;
+    }
 
 
     public void getAllMovies(){
@@ -42,6 +46,9 @@ public class ApiService {
                 if(response.isSuccessful()) {
                     HeadResponse headResponse = response.body();
                     Log.d(TAG, headResponse.getStatus());
+                    List<Result> resultList = headResponse.getResults();
+                    realmHelper.setResults(resultList);
+                    realmHelper.DBrecord();
                 }
             }
             @Override

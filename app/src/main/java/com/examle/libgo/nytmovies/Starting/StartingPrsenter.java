@@ -19,6 +19,6 @@ public class StartingPrsenter implements Presenters {
     @Override
     public void createView() {
         apiService.getAllMovies();
-        apiService.getSearchMovies();
+        // apiService.getSearchMovies();
     }
 }

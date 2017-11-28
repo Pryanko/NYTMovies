@@ -3,11 +3,13 @@ package com.examle.libgo.nytmovies.Pojos;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+
 /**
  * Created by libgo on 28.11.2017.
  */
 
-public class Multimedia {
+public class Multimedia extends RealmObject {
 
     @SerializedName("type")
     @Expose
