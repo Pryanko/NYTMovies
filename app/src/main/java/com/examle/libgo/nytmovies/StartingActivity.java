@@ -14,6 +14,7 @@ public class StartingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starting);
         startingPrsenter = MoviesApp.getAppComponent().getStartingPresenter();
+        startingPrsenter.createView();
 
     }
 }

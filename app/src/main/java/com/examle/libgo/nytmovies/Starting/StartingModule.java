@@ -1,5 +1,7 @@
 package com.examle.libgo.nytmovies.Starting;
 
+import com.examle.libgo.nytmovies.MoviesApiRequest.ApiService;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -10,8 +12,13 @@ import dagger.Provides;
 public class StartingModule {
 
     @Provides
-    StartingPrsenter startingPresenter() {
-        return new StartingPrsenter();
+    ApiService apiService(){
+        return new ApiService();
+    }
+
+    @Provides
+    StartingPrsenter startingPresenter(ApiService apiService) {
+        return new StartingPrsenter(apiService);
     }
 
 
