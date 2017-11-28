@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import com.examle.libgo.nytmovies.Starting.StartingPrsenter;
 
+import io.realm.Realm;
+
 public class StartingActivity extends AppCompatActivity {
 
     StartingPrsenter startingPrsenter;
@@ -23,4 +25,6 @@ public class StartingActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+    Realm realm = Realm.getInstance(Realm.getDefaultConfiguration());
+
 }
