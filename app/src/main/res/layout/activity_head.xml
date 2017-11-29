@@ -6,8 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.examle.libgo.nytmovies.Head.HeadActivity">
 
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorWhite"
+        android:id="@+id/view"
+        />
+
+
+
 </android.support.constraint.ConstraintLayout>

@@ -8,5 +8,7 @@ public interface Presenters {
 
     void createView();
 
+    void errorCall();
+
 
 }

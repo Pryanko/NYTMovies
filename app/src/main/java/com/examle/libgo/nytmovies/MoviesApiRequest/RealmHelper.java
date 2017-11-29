@@ -36,14 +36,17 @@ public class RealmHelper {
 
 
     private void moviesRealmRecord(){
+        int i = 0;
         if(movies != null) {
             moviesRealm = Realm.getDefaultInstance();
 
             for (Movies movies : movies) {
+                i++;
                 moviesRealm.beginTransaction();
-                Movies realmMovies = moviesRealm.createObject(Movies.class);
+                Movies realmMovies = moviesRealm.createObject(Movies.class, i);
                 realmMovies.setDisplayTitle(movies.getDisplayTitle());
                 realmMovies.setHeadline(movies.getHeadline());
+                realmMovies.setOpeningDate(movies.getOpeningDate());
                 realmMovies.setSummaryShort(movies.getSummaryShort());
                 realmMovies.setMpaaRating(movies.getMpaaRating());
                 realmMovies.setCriticsPick(movies.getCriticsPick());
@@ -55,23 +58,6 @@ public class RealmHelper {
                 Log.d("БД :", responsedb.toString());
             }
         }
-
-
-
-       /* if (links != null) {
-
-            for (Link link : links) {
-                moviesRealm.beginTransaction();
-                Link linkRealm = moviesRealm.createObject(Link.class);
-                linkRealm.setUrl(link.getUrl());
-                moviesRealm.commitTransaction();
-             //   RealmQuery<Link> query = moviesRealm.where(Link.class);
-             //   RealmResults<Link> realmResults = query.findAll();
-             //   Log.d("БД линк :", realmResults.toString());
-
-            }
-        }*/
-       // Я это тут оставлю для тебя - что бы ты знал что я делал не правильно)))
     }
 
     private void goodJob(){

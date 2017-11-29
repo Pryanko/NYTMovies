@@ -13,4 +13,9 @@ public class HeadPrsenter implements Presenters {
     public void createView() {
 
     }
+
+    @Override
+    public void errorCall() {
+
+    }
 }

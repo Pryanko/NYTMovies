@@ -1,6 +1,10 @@
 package com.examle.libgo.nytmovies.MoviesApiRequest;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.examle.libgo.nytmovies.Pojos.HeadResponse;
 import com.examle.libgo.nytmovies.Pojos.Link;
@@ -23,23 +27,24 @@ import retrofit2.Response;
 public class ApiService {
 
     private RealmHelper realmHelper;
+    private StartingPrsenter startingPrsenter;
     final private String API_KEY = "e6b1734db83649b7aefd602fa213fcda";
     final private String TAG = "Сервер";
     String spider = "Spider";
+
 
     public ApiService(RealmHelper realmHelper) {
         this.realmHelper = realmHelper;
     }
 
 
-    public void getAllMovies(){
+    public void getAllMovies() {
         downloadAllMovies();
     }
 
-    public void getSearchMovies(){
+    public void getSearchMovies() {
         downloadSearchMovies();
     }
-
 
 
     private void downloadAllMovies() {
@@ -48,12 +53,12 @@ public class ApiService {
         callAllMovies.enqueue(new Callback<HeadResponse>() {
             @Override
             public void onResponse(Call<HeadResponse> call, Response<HeadResponse> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     HeadResponse headResponse = response.body();
                     Log.d(TAG, headResponse.getStatus());
                     List<Result> resultList = headResponse.getResults();
                     List<Movies> movies = new ArrayList<>();
-                    for (Result result : resultList){
+                    for (Result result : resultList) {
                         Movies movie = new Movies();
                         movie.setHeadline(result.getHeadline());
                         movie.setDisplayTitle(result.getDisplayTitle());
@@ -71,12 +76,15 @@ public class ApiService {
                     realmHelper.startDBrecord();
                 }
             }
+
             @Override
             public void onFailure(Call<HeadResponse> call, Throwable t) {
 
+                startingPrsenter.errorCall();
             }
         });
     }
+
 
     private void downloadSearchMovies() {
         RequestApi requestApi = RequestApi.retrofit.create(RequestApi.class);
@@ -84,10 +92,10 @@ public class ApiService {
         callSearchMovies.enqueue(new Callback<HeadResponse>() {
             @Override
             public void onResponse(Call<HeadResponse> call, Response<HeadResponse> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     HeadResponse headResponse = response.body();
                     List<Result> resultList = headResponse.getResults();
-                    for(Result result : resultList){
+                    for (Result result : resultList) {
                         Log.d(TAG, result.getHeadline());
                     }
                 }
@@ -102,7 +110,9 @@ public class ApiService {
 
     }
 
-    public void setPrsenter(StartingPrsenter prsenter){
+    public void setPrsenter(StartingPrsenter prsenter) {
+        this.startingPrsenter = prsenter;
         realmHelper.setStartingPrsenter(prsenter);
     }
 }
+

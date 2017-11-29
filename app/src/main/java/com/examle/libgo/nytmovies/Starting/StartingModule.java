@@ -2,6 +2,7 @@ package com.examle.libgo.nytmovies.Starting;
 
 import com.examle.libgo.nytmovies.MoviesApiRequest.ApiService;
 import com.examle.libgo.nytmovies.MoviesApiRequest.RealmHelper;
+import com.examle.libgo.nytmovies.Utils.ResponseHandler;
 
 import dagger.Module;
 import dagger.Provides;
@@ -11,6 +12,11 @@ import dagger.Provides;
  */
 @Module
 public class StartingModule {
+
+    @Provides
+    ResponseHandler responseHandler(){
+        return new ResponseHandler();
+    }
 
     @Provides
     RealmHelper realmHelper(){
@@ -23,8 +29,8 @@ public class StartingModule {
     }
 
     @Provides
-    StartingPrsenter startingPresenter(ApiService apiService) {
-        return new StartingPrsenter(apiService);
+    StartingPrsenter startingPresenter(ApiService apiService, ResponseHandler responseHandler) {
+        return new StartingPrsenter(apiService, responseHandler);
     }
 
 

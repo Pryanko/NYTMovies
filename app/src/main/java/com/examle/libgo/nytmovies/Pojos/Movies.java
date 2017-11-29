@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by libgo on 29.11.2017.
@@ -11,6 +12,10 @@ import io.realm.RealmObject;
 
 public class Movies extends RealmObject {
 
+    @SerializedName("id")
+    @Expose
+    @PrimaryKey
+    private Integer id;
     @SerializedName("display_title")
     @Expose
     private String displayTitle;
@@ -36,6 +41,12 @@ public class Movies extends RealmObject {
     @Expose
     private String src;
 
+    public void setId (Integer id){
+        this.id = id;
+    }
+    public Integer getId(){
+        return id;
+    }
     public String getDisplayTitle() {
         return displayTitle;
     }

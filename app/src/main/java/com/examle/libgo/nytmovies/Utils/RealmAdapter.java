@@ -1,12 +1,16 @@
 package com.examle.libgo.nytmovies.Utils;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,6 +37,7 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
     private Context context;
     public List<Movies> data;
 
+
     public RealmAdapter(RealmResults<Movies> data) {
         //super(data, autoUpdate);
         this.data = data;
@@ -45,10 +50,15 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
        View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_movies, parent, false);
+
        context = parent.getContext();
-
-
        return new ViewHolder(itemView);
+    }
+
+    @Override
+    public void onViewAttachedToWindow(ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+
     }
 
     @Override
@@ -59,9 +69,11 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
         holder.textHeadLine.setText(movie.getHeadline());
         holder.textSummary.setText(movie.getSummaryShort());
         holder.progressBar.setVisibility(ProgressBar.VISIBLE);
+
         Picasso.with(context)
                 .load(movie.getSrc())
-                // .resize(300,200)
+                .error(R.drawable.movies)
+                .resize(660,440)
                 .into(holder.imageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -69,7 +81,7 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
                     }
                     @Override
                     public void onError() {
-
+                        holder.progressBar.setVisibility(ProgressBar.INVISIBLE);
                     }
                 });
     }
@@ -94,6 +106,8 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
         ProgressBar progressBar;
 
 
+
+
         ViewHolder(View view) {
             super(view);
             textDisplayTitle = (TextView) view.findViewById(R.id.textDisplayTitle);
@@ -102,6 +116,8 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
             textSummary = (TextView) view.findViewById(R.id.textSummary);
             imageView = (ImageView) view.findViewById(R.id.imageView);
             progressBar = (ProgressBar) view.findViewById(R.id.progressBar2);
+
+
         }
 
 
