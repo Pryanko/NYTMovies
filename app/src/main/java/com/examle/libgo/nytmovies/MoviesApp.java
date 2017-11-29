@@ -23,7 +23,7 @@ public class MoviesApp extends Application {
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
                 .name("realm.movies_menu")
                 .schemaVersion(0)
-                //.deleteRealmIfMigrationNeeded()
+                .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 

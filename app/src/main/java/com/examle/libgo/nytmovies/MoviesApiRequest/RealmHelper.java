@@ -37,7 +37,7 @@ public class RealmHelper {
 
     private void moviesRealmRecord(){
         if(movies != null) {
-            moviesRealm = Realm.getInstance(Realm.getDefaultConfiguration());
+            moviesRealm = Realm.getDefaultInstance();
 
             for (Movies movies : movies) {
                 moviesRealm.beginTransaction();

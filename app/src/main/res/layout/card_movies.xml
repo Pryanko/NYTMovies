@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginBottom="8dp"
+    android:elevation="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/movies" />
+
+        <TextView
+            android:id="@+id/textDisplayTitle"
+            android:layout_below="@id/imageView"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:gravity="left"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:textSize="30sp"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_below="@+id/textDisplayTitle"
+            android:background="@color/colorBlack"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            />
+
+        <TextView
+            android:id="@+id/textDate"
+            android:layout_below="@+id/view"
+            android:layout_marginTop="8dp"
+            android:gravity="right"
+            android:layout_marginRight="24dp"
+            android:textSize="26sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textHeadLine"
+            android:layout_below="@id/textDate"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
+            android:textSize="22sp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textSummary"
+            android:layout_below="@+id/textHeadLine"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
+            android:textSize="22sp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textDisplayTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp" />
+
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

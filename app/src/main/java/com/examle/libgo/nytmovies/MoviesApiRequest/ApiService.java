@@ -8,7 +8,6 @@ import com.examle.libgo.nytmovies.Pojos.Movies;
 import com.examle.libgo.nytmovies.Pojos.Multimedia;
 import com.examle.libgo.nytmovies.Pojos.Result;
 import com.examle.libgo.nytmovies.Starting.StartingPrsenter;
-import com.examle.libgo.nytmovies.StartingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
