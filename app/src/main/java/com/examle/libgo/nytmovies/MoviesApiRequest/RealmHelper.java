@@ -36,14 +36,12 @@ public class RealmHelper {
 
 
     private void moviesRealmRecord(){
-        int i = 0;
         if(movies != null) {
             moviesRealm = Realm.getDefaultInstance();
 
             for (Movies movies : movies) {
-                i++;
                 moviesRealm.beginTransaction();
-                Movies realmMovies = moviesRealm.createObject(Movies.class, i);
+                Movies realmMovies = moviesRealm.createObject(Movies.class);
                 realmMovies.setDisplayTitle(movies.getDisplayTitle());
                 realmMovies.setHeadline(movies.getHeadline());
                 realmMovies.setOpeningDate(movies.getOpeningDate());
@@ -53,10 +51,8 @@ public class RealmHelper {
                 realmMovies.setUrl(movies.getUrl());
                 realmMovies.setSrc(movies.getSrc());
                 moviesRealm.commitTransaction();
-                RealmQuery<Movies> query = moviesRealm.where(Movies.class);
-                RealmResults<Movies> responsedb = query.findAll();
-                Log.d("БД :", responsedb.toString());
             }
+            Log.d("БД :", moviesRealm.toString());
         }
     }
 

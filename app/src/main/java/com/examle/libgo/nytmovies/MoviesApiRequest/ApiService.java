@@ -12,6 +12,7 @@ import com.examle.libgo.nytmovies.Pojos.Movies;
 import com.examle.libgo.nytmovies.Pojos.Multimedia;
 import com.examle.libgo.nytmovies.Pojos.Result;
 import com.examle.libgo.nytmovies.Starting.StartingPrsenter;
+import com.examle.libgo.nytmovies.Starting.TimeResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +28,16 @@ import retrofit2.Response;
 public class ApiService {
 
     private RealmHelper realmHelper;
+    private TimeResponse timeResponse;
     private StartingPrsenter startingPrsenter;
     final private String API_KEY = "e6b1734db83649b7aefd602fa213fcda";
     final private String TAG = "Сервер";
     String spider = "Spider";
 
 
-    public ApiService(RealmHelper realmHelper) {
+    public ApiService(RealmHelper realmHelper, TimeResponse timeResponse) {
         this.realmHelper = realmHelper;
+        this.timeResponse = timeResponse;
     }
 
 
@@ -74,6 +77,8 @@ public class ApiService {
                     }
                     realmHelper.setMovies(movies);
                     realmHelper.startDBrecord();
+                    String time = timeResponse.getTime();
+                    Log.d("Time", time);
                 }
             }
 

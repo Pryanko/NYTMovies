@@ -1,7 +1,6 @@
 package com.examle.libgo.nytmovies;
 
 import android.app.Application;
-
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 

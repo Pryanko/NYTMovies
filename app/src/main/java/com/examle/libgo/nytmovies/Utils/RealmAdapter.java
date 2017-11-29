@@ -3,6 +3,8 @@ package com.examle.libgo.nytmovies.Utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +16,9 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.examle.libgo.nytmovies.Head.HeadActivity;
 import com.examle.libgo.nytmovies.Pojos.Movies;
 import com.examle.libgo.nytmovies.Pojos.Result;
 import com.examle.libgo.nytmovies.R;
@@ -35,12 +39,13 @@ import io.realm.RealmResults;
 public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> {
 
     private Context context;
-    public List<Movies> data;
+    private List<Movies> data;
+    private HeadActivity headActivity;
 
-
-    public RealmAdapter(RealmResults<Movies> data) {
+    public RealmAdapter(RealmResults<Movies> data, HeadActivity headActivity) {
         //super(data, autoUpdate);
         this.data = data;
+        this.headActivity = headActivity;
 
         //setHasStableIds(true);
 
@@ -50,16 +55,16 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
        View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_movies, parent, false);
-
+       //itemView.setOnClickListener(headActivity);
        context = parent.getContext();
        return new ViewHolder(itemView);
     }
 
-    @Override
+   /* @Override
     public void onViewAttachedToWindow(ViewHolder holder) {
         super.onViewAttachedToWindow(holder);
 
-    }
+    }*/
 
     @Override
     public void onBindViewHolder(RealmAdapter.ViewHolder holder, int position) {
@@ -69,6 +74,17 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
         holder.textHeadLine.setText(movie.getHeadline());
         holder.textSummary.setText(movie.getSummaryShort());
         holder.progressBar.setVisibility(ProgressBar.VISIBLE);
+        holder.textViewReadMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(movie.getUrl()));
+                headActivity.startActivity(intent);
+
+            }
+        });
+
+
 
         Picasso.with(context)
                 .load(movie.getSrc())
@@ -96,7 +112,6 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
         return 0;
     }
 
-
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView textDisplayTitle;
         TextView textDate;
@@ -104,12 +119,14 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
         TextView textSummary;
         ImageView imageView;
         ProgressBar progressBar;
+        TextView textViewReadMore;
 
 
 
 
         ViewHolder(View view) {
             super(view);
+            textViewReadMore = (TextView) view.findViewById(R.id.textViewReadMore);
             textDisplayTitle = (TextView) view.findViewById(R.id.textDisplayTitle);
             textDate = (TextView) view.findViewById(R.id.textDate);
             textHeadLine = (TextView) view.findViewById(R.id.textHeadLine);

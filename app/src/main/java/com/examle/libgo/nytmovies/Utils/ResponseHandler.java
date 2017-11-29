@@ -29,8 +29,7 @@ public class ResponseHandler {
 
     private void offLineStart(StartingActivity startingActivity){
         realm = Realm.getDefaultInstance();
-        Movies movies = realm.where(Movies.class).equalTo("id", 20).findFirst();
-        if(movies == null){
+        if(realm == null){
             Toast toast = Toast.makeText(startingActivity, "Нет подключения к интернету", Toast.LENGTH_LONG);
             toast.show();
             startingActivity.finish(); // Так делать нельзя)

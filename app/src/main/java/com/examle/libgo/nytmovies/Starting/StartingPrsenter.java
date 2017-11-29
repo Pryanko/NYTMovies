@@ -1,7 +1,6 @@
 package com.examle.libgo.nytmovies.Starting;
 
 import android.content.Intent;
-
 import com.examle.libgo.nytmovies.Head.HeadActivity;
 import com.examle.libgo.nytmovies.MoviesApiRequest.ApiService;
 import com.examle.libgo.nytmovies.Presenters;
@@ -42,7 +41,7 @@ public class StartingPrsenter implements Presenters {
     }
 
 
-    public void startNextActivity(){
+    public void startNextActivity() {
         nextActivity(activity);
     }
 

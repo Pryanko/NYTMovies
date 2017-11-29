@@ -1,5 +1,7 @@
 package com.examle.libgo.nytmovies.Starting;
 
+import android.content.SharedPreferences;
+
 import com.examle.libgo.nytmovies.MoviesApiRequest.ApiService;
 import com.examle.libgo.nytmovies.MoviesApiRequest.RealmHelper;
 import com.examle.libgo.nytmovies.Utils.ResponseHandler;
@@ -14,6 +16,11 @@ import dagger.Provides;
 public class StartingModule {
 
     @Provides
+    TimeResponse timeResponse(){
+        return new TimeResponse();
+    }
+
+    @Provides
     ResponseHandler responseHandler(){
         return new ResponseHandler();
     }
@@ -24,8 +31,8 @@ public class StartingModule {
     }
 
     @Provides
-    ApiService apiService(RealmHelper realmHelper){
-        return new ApiService(realmHelper);
+    ApiService apiService(RealmHelper realmHelper, TimeResponse timeResponse){
+        return new ApiService(realmHelper, timeResponse);
     }
 
     @Provides
