@@ -25,6 +25,6 @@ public class StartingActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
-    Realm realm = Realm.getInstance(Realm.getDefaultConfiguration());
+//    Realm realm = Realm.getInstance(Realm.getDefaultConfiguration());
 
 }

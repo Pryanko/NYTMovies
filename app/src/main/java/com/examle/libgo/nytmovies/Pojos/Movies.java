@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
 import io.realm.RealmObject;
 
 /**
- * Created by libgo on 28.11.2017.
+ * Created by libgo on 29.11.2017.
  */
 
-public class Result  {
+public class Movies extends RealmObject {
 
     @SerializedName("display_title")
     @Expose
@@ -20,30 +20,21 @@ public class Result  {
     @SerializedName("critics_pick")
     @Expose
     private Integer criticsPick;
-    @SerializedName("byline")
-    @Expose
-    private String byline;
     @SerializedName("headline")
     @Expose
     private String headline;
     @SerializedName("summary_short")
     @Expose
     private String summaryShort;
-    @SerializedName("publication_date")
-    @Expose
-    private String publicationDate;
     @SerializedName("opening_date")
     @Expose
     private String openingDate;
-    @SerializedName("date_updated")
+    @SerializedName("url")
     @Expose
-    private String dateUpdated;
-    @SerializedName("link")
+    private String url;
+    @SerializedName("src")
     @Expose
-    private Link link;
-    @SerializedName("multimedia")
-    @Expose
-    private Multimedia multimedia;
+    private String src;
 
     public String getDisplayTitle() {
         return displayTitle;
@@ -69,14 +60,6 @@ public class Result  {
         this.criticsPick = criticsPick;
     }
 
-    public String getByline() {
-        return byline;
-    }
-
-    public void setByline(String byline) {
-        this.byline = byline;
-    }
-
     public String getHeadline() {
         return headline;
     }
@@ -93,14 +76,6 @@ public class Result  {
         this.summaryShort = summaryShort;
     }
 
-    public String getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(String publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
     public String getOpeningDate() {
         return openingDate;
     }
@@ -109,29 +84,19 @@ public class Result  {
         this.openingDate = openingDate;
     }
 
-    public String getDateUpdated() {
-        return dateUpdated;
+    public String getUrl() {
+        return url;
     }
 
-    public void setDateUpdated(String dateUpdated) {
-        this.dateUpdated = dateUpdated;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public Link getLink() {
-        return link;
+    public String getSrc() {
+        return src;
     }
 
-    public void setLink(Link link) {
-        this.link = link;
+    public void setSrc(String src) {
+        this.src = src;
     }
-
-    public Multimedia getMultimedia() {
-        return multimedia;
-    }
-
-    public void setMultimedia(Multimedia multimedia) {
-        this.multimedia = multimedia;
-    }
-
 }
-

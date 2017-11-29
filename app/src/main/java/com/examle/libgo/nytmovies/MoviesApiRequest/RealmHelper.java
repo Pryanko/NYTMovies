@@ -2,6 +2,7 @@ package com.examle.libgo.nytmovies.MoviesApiRequest;
 
 import android.util.Log;
 import com.examle.libgo.nytmovies.Pojos.Link;
+import com.examle.libgo.nytmovies.Pojos.Movies;
 import com.examle.libgo.nytmovies.Pojos.Multimedia;
 import com.examle.libgo.nytmovies.Pojos.Result;
 import com.examle.libgo.nytmovies.Starting.StartingPrsenter;
@@ -18,18 +19,14 @@ public class RealmHelper {
 
     private StartingPrsenter startingPrsenter;
     private Realm moviesRealm;
-    private List<Result> results;
-    private List<Multimedia> multimediaList;
-    private List<Link> links;
+    private List<Movies> movies;
 
     public void setStartingPrsenter(StartingPrsenter startingPrsenter) {  //На данный момент у меня некоторые недопонмание СУТИ RX - в данный момент тут не могу его применить, придется передать - экземпляр презентера
         this.startingPrsenter = startingPrsenter;                         //Я знаю что это дикое решение, но нет времени выяснять как правильно.
     }
 
-    public void setResults(List<Result> results, List<Multimedia> multimediaList, List<Link> links) {
-        this.results = results;
-        this.multimediaList = multimediaList;
-        this.links = links;
+    public void setMovies(List<Movies> movies) {
+        this.movies = movies;
     }
 
     public void startDBrecord(){
@@ -39,38 +36,29 @@ public class RealmHelper {
 
 
     private void moviesRealmRecord(){
-        if(results != null) {
+        if(movies != null) {
             moviesRealm = Realm.getInstance(Realm.getDefaultConfiguration());
 
-            for (Result result : results) {
+            for (Movies movies : movies) {
                 moviesRealm.beginTransaction();
-                Result realmResult = moviesRealm.createObject(Result.class);
-                realmResult.setDisplayTitle(result.getDisplayTitle());
-                realmResult.setHeadline(result.getHeadline());
-                realmResult.setSummaryShort(result.getSummaryShort());
-                realmResult.setMpaaRating(result.getMpaaRating());
-                realmResult.setOpeningDate(result.getOpeningDate());
-                realmResult.setCriticsPick(result.getCriticsPick());
-                // realmResult.setMultimedia(result.getMultimedia()); // Так не работаЭт - разбиваем на массивы уровнем выше)
-                // realmResult.setLink(result.getLink());
+                Movies realmMovies = moviesRealm.createObject(Movies.class);
+                realmMovies.setDisplayTitle(movies.getDisplayTitle());
+                realmMovies.setHeadline(movies.getHeadline());
+                realmMovies.setSummaryShort(movies.getSummaryShort());
+                realmMovies.setMpaaRating(movies.getMpaaRating());
+                realmMovies.setCriticsPick(movies.getCriticsPick());
+                realmMovies.setUrl(movies.getUrl());
+                realmMovies.setSrc(movies.getSrc());
                 moviesRealm.commitTransaction();
-              //  RealmQuery<Result> query = moviesRealm.where(Result.class);
-              //  RealmResults<Result> responsedb = query.findAll();
-              //  Log.d("БД :", responsedb.toString());
+                RealmQuery<Movies> query = moviesRealm.where(Movies.class);
+                RealmResults<Movies> responsedb = query.findAll();
+                Log.d("БД :", responsedb.toString());
             }
         }
 
-        if (multimediaList != null){
 
-            for (Multimedia multimedia : multimediaList){
-                moviesRealm.beginTransaction();
-                Multimedia realmMult = moviesRealm.createObject(Multimedia.class);
-                realmMult.setSrc(multimedia.getSrc());
-                moviesRealm.commitTransaction();
-            }
-        }
 
-        if (links != null) {
+       /* if (links != null) {
 
             for (Link link : links) {
                 moviesRealm.beginTransaction();
@@ -82,7 +70,8 @@ public class RealmHelper {
              //   Log.d("БД линк :", realmResults.toString());
 
             }
-        }
+        }*/
+       // Я это тут оставлю для тебя - что бы ты знал что я делал не правильно)))
     }
 
     private void goodJob(){

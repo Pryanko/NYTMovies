@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.examle.libgo.nytmovies.Pojos.HeadResponse;
 import com.examle.libgo.nytmovies.Pojos.Link;
+import com.examle.libgo.nytmovies.Pojos.Movies;
 import com.examle.libgo.nytmovies.Pojos.Multimedia;
 import com.examle.libgo.nytmovies.Pojos.Result;
 import com.examle.libgo.nytmovies.Starting.StartingPrsenter;
@@ -52,14 +53,22 @@ public class ApiService {
                     HeadResponse headResponse = response.body();
                     Log.d(TAG, headResponse.getStatus());
                     List<Result> resultList = headResponse.getResults();
-                    List<Multimedia> multimediaList = new ArrayList<>();
-                    List<Link> links = new ArrayList<>();
+                    List<Movies> movies = new ArrayList<>();
                     for (Result result : resultList){
-                        multimediaList.add(result.getMultimedia());
-                        links.add(result.getLink());
+                        Movies movie = new Movies();
+                        movie.setHeadline(result.getHeadline());
+                        movie.setDisplayTitle(result.getDisplayTitle());
+                        movie.setOpeningDate(result.getOpeningDate());
+                        movie.setCriticsPick(result.getCriticsPick());
+                        movie.setMpaaRating(result.getMpaaRating());
+                        movie.setSummaryShort(result.getSummaryShort());
+                        Multimedia multimedia = result.getMultimedia();
+                        movie.setSrc(multimedia.getSrc());
+                        Link link = result.getLink();
+                        movie.setUrl(link.getUrl());
+                        movies.add(movie);
                     }
-
-                    realmHelper.setResults(resultList, multimediaList, links);
+                    realmHelper.setMovies(movies);
                     realmHelper.startDBrecord();
                 }
             }
