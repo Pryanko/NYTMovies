@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 
 import com.examle.libgo.nytmovies.MoviesApiRequest.ApiService;
 import com.examle.libgo.nytmovies.MoviesApiRequest.RealmHelper;
+import com.examle.libgo.nytmovies.MoviesApiRequest.ResponseConverter;
 import com.examle.libgo.nytmovies.Utils.ResponseHandler;
 
 import dagger.Module;
@@ -31,8 +32,8 @@ public class StartingModule {
     }
 
     @Provides
-    ApiService apiService(RealmHelper realmHelper, TimeResponse timeResponse){
-        return new ApiService(realmHelper, timeResponse);
+    ApiService apiService(RealmHelper realmHelper, TimeResponse timeResponse, ResponseConverter responseConverter){
+        return new ApiService(realmHelper, timeResponse, responseConverter);
     }
 
     @Provides

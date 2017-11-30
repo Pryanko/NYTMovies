@@ -21,7 +21,7 @@ public class RealmHelper {
     private Realm moviesRealm;
     private List<Movies> movies;
 
-    public void setStartingPrsenter(StartingPrsenter startingPrsenter) {  //На данный момент у меня некоторые недопонмание СУТИ RX - в данный момент тут не могу его применить, придется передать - экземпляр презентера
+     void setStartingPrsenter(StartingPrsenter startingPrsenter) {  //На данный момент у меня некоторые недопонмание СУТИ RX - в данный момент тут не могу его применить, придется передать - экземпляр презентера
         this.startingPrsenter = startingPrsenter;                         //Я знаю что это дикое решение, но нет времени выяснять как правильно.
     }
 
@@ -29,7 +29,7 @@ public class RealmHelper {
         this.movies = movies;
     }
 
-    public void startDBrecord(){
+     void startDBrecord(){
         moviesRealmRecord();
         goodJob();
     }
@@ -50,6 +50,7 @@ public class RealmHelper {
                 realmMovies.setCriticsPick(movies.getCriticsPick());
                 realmMovies.setUrl(movies.getUrl());
                 realmMovies.setSrc(movies.getSrc());
+                Log.d("zzzzz", movies.getUrl());
                 moviesRealm.commitTransaction();
             }
             Log.d("БД :", moviesRealm.toString());

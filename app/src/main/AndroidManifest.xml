@@ -23,7 +23,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Head.HeadActivity"></activity>
+        <activity android:name=".Head.HeadActivity"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/AppTheme">
+
+        </activity>
     </application>
 
 </manifest>

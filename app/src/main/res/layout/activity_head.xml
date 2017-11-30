@@ -7,19 +7,23 @@
     tools:context="com.examle.libgo.nytmovies.Head.HeadActivity">
 
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/tool_bar" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorWhite" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/colorWhite"
-        android:id="@+id/view"
-        />
-
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include" />
 
 
 </android.support.constraint.ConstraintLayout>

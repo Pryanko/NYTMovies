@@ -1,9 +1,12 @@
 package com.examle.libgo.nytmovies.Head;
 
 import android.support.v7.widget.RecyclerView;
-
+import com.examle.libgo.nytmovies.MoviesApiRequest.SearchApiServise;
+import com.examle.libgo.nytmovies.Pojos.Movies;
 import com.examle.libgo.nytmovies.Presenters;
-import com.examle.libgo.nytmovies.StartingActivity;
+
+import java.util.List;
+
 
 /**
  * Created by libgo on 29.11.2017.
@@ -13,19 +16,22 @@ public class HeadPrsenter implements Presenters {
 
 
     private ViewHelper viewHelper;
-    HeadActivity activity;
+    private SearchApiServise searchApiServise;
+    private HeadActivity activity;
+    private RecyclerView recyclerView;
 
 
-    public HeadPrsenter(ViewHelper viewHelper) {
+    HeadPrsenter(ViewHelper viewHelper, SearchApiServise searchApiServise) {
         this.viewHelper = viewHelper;
+        this.searchApiServise = searchApiServise;
     }
-    public void setActivity (HeadActivity headActivity){
+    void setActivity (HeadActivity headActivity, RecyclerView recyclerView){
         this.activity = headActivity;
+        this.recyclerView = recyclerView;
     }
 
     @Override
     public void createView() {
-
 
     }
 
@@ -34,8 +40,19 @@ public class HeadPrsenter implements Presenters {
 
     }
 
-    public void startView(RecyclerView recyclerView){
-        viewHelper.startRecyclerview(recyclerView,activity);
+    public void searchCall(String search){
+        searchApiServise.setHeadPrsenter(this);
+        searchApiServise.getSearchMovies(search);
+    }
 
+    void startView(){
+        viewHelper.setHeadActivity(activity);
+        viewHelper.setRecyclerView(recyclerView);
+        viewHelper.startRecyclerview();
+
+    }
+
+    public void startSearchView (List<Movies> movies){
+        viewHelper.startRecyclerViewSearch(movies);
     }
 }

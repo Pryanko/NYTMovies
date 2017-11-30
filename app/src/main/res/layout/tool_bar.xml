@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar_actionbar"
+    app:theme="@style/AppSearchViewStyle"
+    android:layout_height="?android:actionBarSize"
+    android:background="@color/colorPrimary">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+        <EditText
+            android:id="@+id/editTextSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="56dp"
+            android:ems="10"
+            android:focusableInTouchMode="true"
+            android:focusedByDefault="false"
+            android:textColor="@color/colorWhite"
+            android:hint="@string/Search"
+            android:textColorHint="@color/colorWhite"
+            android:inputType="textPersonName"
+            />
+
+        <ImageView
+            android:clickable="true"
+            android:tint="@color/colorWhite"
+            android:id="@+id/imageView2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="18dp"
+            app:srcCompat="@drawable/ic_toolbar_search_black_24dp" />
+    </RelativeLayout>
+
+</Toolbar>

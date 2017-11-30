@@ -29,26 +29,22 @@ public class ApiService {
 
     private RealmHelper realmHelper;
     private TimeResponse timeResponse;
+    private ResponseConverter responseConverter;
     private StartingPrsenter startingPrsenter;
     final private String API_KEY = "e6b1734db83649b7aefd602fa213fcda";
     final private String TAG = "Сервер";
-    String spider = "Spider";
 
 
-    public ApiService(RealmHelper realmHelper, TimeResponse timeResponse) {
+    public ApiService(RealmHelper realmHelper, TimeResponse timeResponse, ResponseConverter responseConverter) {
         this.realmHelper = realmHelper;
         this.timeResponse = timeResponse;
+        this.responseConverter = responseConverter;
     }
 
 
     public void getAllMovies() {
         downloadAllMovies();
     }
-
-    public void getSearchMovies() {
-        downloadSearchMovies();
-    }
-
 
     private void downloadAllMovies() {
         RequestApi requestApi = RequestApi.retrofit.create(RequestApi.class);
@@ -61,20 +57,8 @@ public class ApiService {
                     Log.d(TAG, headResponse.getStatus());
                     List<Result> resultList = headResponse.getResults();
                     List<Movies> movies = new ArrayList<>();
-                    for (Result result : resultList) {
-                        Movies movie = new Movies();
-                        movie.setHeadline(result.getHeadline());
-                        movie.setDisplayTitle(result.getDisplayTitle());
-                        movie.setOpeningDate(result.getOpeningDate());
-                        movie.setCriticsPick(result.getCriticsPick());
-                        movie.setMpaaRating(result.getMpaaRating());
-                        movie.setSummaryShort(result.getSummaryShort());
-                        Multimedia multimedia = result.getMultimedia();
-                        movie.setSrc(multimedia.getSrc());
-                        Link link = result.getLink();
-                        movie.setUrl(link.getUrl());
-                        movies.add(movie);
-                    }
+                    movies = responseConverter.getMovies(resultList);
+                    //Log.d("zzZZZ", movies.toString());
                     realmHelper.setMovies(movies);
                     realmHelper.startDBrecord();
                     String time = timeResponse.getTime();
@@ -88,31 +72,6 @@ public class ApiService {
                 startingPrsenter.errorCall();
             }
         });
-    }
-
-
-    private void downloadSearchMovies() {
-        RequestApi requestApi = RequestApi.retrofit.create(RequestApi.class);
-        Call<HeadResponse> callSearchMovies = requestApi.getSearchMovies(API_KEY, spider);
-        callSearchMovies.enqueue(new Callback<HeadResponse>() {
-            @Override
-            public void onResponse(Call<HeadResponse> call, Response<HeadResponse> response) {
-                if (response.isSuccessful()) {
-                    HeadResponse headResponse = response.body();
-                    List<Result> resultList = headResponse.getResults();
-                    for (Result result : resultList) {
-                        Log.d(TAG, result.getHeadline());
-                    }
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<HeadResponse> call, Throwable t) {
-
-            }
-        });
-
     }
 
     public void setPrsenter(StartingPrsenter prsenter) {

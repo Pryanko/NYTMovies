@@ -1,5 +1,8 @@
 package com.examle.libgo.nytmovies.Head;
 
+import com.examle.libgo.nytmovies.MoviesApiRequest.ApiService;
+import com.examle.libgo.nytmovies.MoviesApiRequest.ResponseConverter;
+import com.examle.libgo.nytmovies.MoviesApiRequest.SearchApiServise;
 import com.examle.libgo.nytmovies.Utils.RealmAdapter;
 
 import dagger.Module;
@@ -12,6 +15,15 @@ import io.realm.Realm;
 @Module
 public class HeadModule {
 
+    @Provides
+    ResponseConverter responseConverter() {
+        return new ResponseConverter();
+    }
+
+   @Provides
+    SearchApiServise searchApiServise(ResponseConverter responseConverter){
+       return new SearchApiServise(responseConverter);
+   }
 
 
     @Provides
@@ -20,8 +32,8 @@ public class HeadModule {
     }
 
     @Provides
-    HeadPrsenter headPrsenter(ViewHelper viewHelper){
-        return new HeadPrsenter(viewHelper);
+    HeadPrsenter headPrsenter(ViewHelper viewHelper, SearchApiServise searchApiServise){
+        return new HeadPrsenter(viewHelper, searchApiServise);
     }
 
 }
